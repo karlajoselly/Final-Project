@@ -41,9 +41,20 @@ function setup() {
 //Set canvas to be the whole window    
   // createCanvas(800, 400);
   width = 800;
-
+// constructor(rowY, numObstacles, tempSpeed, obstacleWidth, 
+// 		tempSpacing, xObstacle,layerColor,barrelDeath)
   layers = [ 
-  	new Layer(0,1,0 width,) ];
+  	new Layer(            0, 1,    0,         width,   0,   0, true),
+    new Layer(    grid_size, 1,    0,         width,   0,   0, true),
+    new Layer(2 * grid_size, 2,  0.5, 4 * grid_size, 400,  10, true),
+    new Layer(3 * grid_size, 3, -1.3, 2 * grid_size, 200,  30, true),
+    new Layer(4 * grid_size, 2,  2.3, 3 * grid_size, 250,  25, true),
+    new Layer(5 * grid_size, 1,    0,         width,   0,   0, true),
+    new Layer(6 * grid_size, 3,  1.2, 1 * grid_size, 150, 100, false),
+    new Layer(7 * grid_size, 2, -3.5, 1 * grid_size, 200, 150, false),
+    new Layer(8 * grid_size, 2,    2, 2 * grid_size, 300,   0, false),
+    new Layer(9 * grid_size, 2,    0,         width,   0,   0, true),
+  ];
 
   createCanvas(width, rows.length * grid_size);
   resetGame();	

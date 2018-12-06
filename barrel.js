@@ -1,31 +1,29 @@
 class Barrel {
 
-	constructor(x,y,obstacleGraphic,s,w,h,imageSize) {
+	constructor(x,y,barrelGraphic) {
 	this.x;
 	this.y;
-	this.w;	
-	this.h;
-	this.imageSize;
-	this.speed = s;
+	this.barrelGraphic;
+	this.sitting_on = null;
 	
 
 	}
-
+	attach (other) {
+		this.sitting_on = other;
+	}
 	update () {
 		this.move(this.speed,0);
-		if(this.x > width + grid_size) {
-			this.x = this.obstacleGraphic - grid_size;
+		if(this.sitting_on !== null) {
+			this.x += this.sitting_on.speed;
 		}
 
-		if(this.x < - this.obstacleGraphic -grid_size) {
-			this.x = width + grid_size;
-
-		}
+		this.x += constrain(this.x, 0 , width -this.w)
 	}
 
 	display () {
-		scale(this.imageSize);
-		image(this.obstacleGraphic,this.w,this.h,this.x,this.y);
+
+		scale(0.5);
+		animation(barrel, this.x, this.y);
 		// animation(obstacleGraphic,this.x,this.y);
 
 	}
