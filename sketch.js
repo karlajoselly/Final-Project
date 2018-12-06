@@ -2,7 +2,7 @@
 // Karla Ruiz
 // Snow Barrel Game
 
-var barrel;
+var barrel, barrelMain;
 var barrelSprite; 
 var coin;
 var coinSprite;
@@ -32,7 +32,7 @@ function preload() {
 
 function resetGame () {
 
-	// barrel = new Barrel ();
+	 barrelMain = new Barrel (width/2, height-grid_size, barrel);
 
 }
 
@@ -44,16 +44,16 @@ function setup() {
 // constructor(rowY, numObstacles, tempSpeed, obstacleWidth, 
 // 		tempSpacing, xObstacle,layerColor,barrelDeath)
   layers = [ 
-  	new Layer(            0, 1,    0,         width,   0,   0, true),
-    new Layer(    grid_size, 1,    0,         width,   0,   0, true),
-    new Layer(2 * grid_size, 2,  0.5, 4 * grid_size, 400,  10, true),
-    new Layer(3 * grid_size, 3, -1.3, 2 * grid_size, 200,  30, true),
-    new Layer(4 * grid_size, 2,  2.3, 3 * grid_size, 250,  25, true),
-    new Layer(5 * grid_size, 1,    0,         width,   0,   0, true),
-    new Layer(6 * grid_size, 3,  1.2, 1 * grid_size, 150, 100, false),
-    new Layer(7 * grid_size, 2, -3.5, 1 * grid_size, 200, 150, false),
-    new Layer(8 * grid_size, 2,    2, 2 * grid_size, 300,   0, false),
-    new Layer(9 * grid_size, 2,    0,         width,   0,   0, true),
+  	new Layer(            0, 1,    0, 150,   0,   0, color(244,244,245),false),
+    new Layer(    grid_size, 1,    0, 150,   0,   0, color(244,244,245),false),
+    new Layer(2 * grid_size, 2,  0.5, 150, 400,  10, color(96,202,228),true),
+    new Layer(3 * grid_size, 3, -1.3, 70, 200,  30, color(244,244,245),false),
+    new Layer(4 * grid_size, 2,  2.3, 70, 250,  25, color(244,244,245),false),
+    new Layer(5 * grid_size, 1,    0, 150,   0,   0,color(96,202,228), true),
+    new Layer(6 * grid_size, 3,  1.2, 70, 150, 100, color(244,244,245),false),
+    new Layer(7 * grid_size, 2, -3.5, 70, 200, 150, color(96,202,228), true),
+    new Layer(8 * grid_size, 2,    2, 70, 300,   0, color(244,244,245),false),
+    new Layer(9 * grid_size, 2,    0, 150,   0,   0, color(244,244,245),false),
   ];
 
   createCanvas(width, rows.length * grid_size);
@@ -72,24 +72,6 @@ function draw() {
 
 }
 
-
-
-class Obstacle {
-
-	constructor(tempGround, tempSpeed, tempGraphic) {
-
-	this.ground = tempGround;
-	this.speed = tempSpeed;
-	this.graphic = tempGraphic;	
-
-	}
-
-}
-
-class Barrel {
-
-
-}
 
 
 function keyPressed() {
