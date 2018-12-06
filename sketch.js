@@ -65,8 +65,24 @@ function draw() {
     // clear();
     // animation(barrel, 500, 500);
     // animation(coin, 100,200);
+    var intersects = null;
 
-   
+    for (var i =; i < layers.length; i++) {
+    	layers[i].show();
+	    layers[i].update();
+	    if(barrelMain.intersects(layers[i])) {
+	      intersects = layers[i].hits(barrelMain);
+	      if((intersects !== null) ^ layers[i].inverted) {
+	        resetGame();
+	      }
+	    }
+
+
+    }
+  
+  barrelMain.attach(intersects);
+  barrelMain.update();
+  barrelMain.display();
 
 
 
