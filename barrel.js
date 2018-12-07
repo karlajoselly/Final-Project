@@ -5,8 +5,23 @@ class Barrel {
 	this.y;
 	this.barrelGraphic;
 	this.sitting_on = null;
+	// this.w = 150;
+	// this.h = 150;
 	
 
+	}
+	intersects (other) {
+		return! (
+			 this.x + this.w  <= other.x            ||
+    		 this.x           >= other.x + other.w  ||
+    		 this.y + this.h  <= other.y            ||
+   			 this.y           >= other.y + other.h
+  		);
+	}
+	move (x,y) {
+		
+		this.x += x;
+  		this.y += y;
 	}
 	attach (other) {
 		this.sitting_on = other;

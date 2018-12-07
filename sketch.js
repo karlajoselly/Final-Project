@@ -56,7 +56,7 @@ function setup() {
     new Layer(9 * grid_size, 2,    0, 150,   0,   0, color(244,244,245),false),
   ];
 
-  createCanvas(width, rows.length * grid_size);
+  createCanvas(width, layers.length * grid_size);
   resetGame();	
 
 }
@@ -67,12 +67,12 @@ function draw() {
     // animation(coin, 100,200);
     var intersects = null;
 
-    for (var i =; i < layers.length; i++) {
-    	layers[i].show();
+    for (var i = 0; i < layers.length; i++) {
+    	layers[i].display();
 	    layers[i].update();
 	    if(barrelMain.intersects(layers[i])) {
 	      intersects = layers[i].hits(barrelMain);
-	      if((intersects !== null) ^ layers[i].inverted) {
+	      if((intersects !== null) ^ layers[i].barrelDeath) {
 	        resetGame();
 	      }
 	    }

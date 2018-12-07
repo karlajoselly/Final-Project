@@ -10,6 +10,19 @@ class Obstacle {
 	
 
 	}
+	intersects (other) {
+		return! (
+			 this.x + this.w  <= other.x            ||
+    		 this.x           >= other.x + other.w  ||
+    		 this.y + this.h  <= other.y            ||
+   			 this.y           >= other.y + other.h
+  );
+	}
+	move (x,y) {
+		
+		this.x += x;
+  		this.y += y;
+	}
 
 	update () {
 		this.move(this.speed,0);

@@ -11,12 +11,13 @@ class Layer {
 	this.xObstacle = xObstacle;
 	this.barrelDeath = barrelDeath;
 	this.layerColor = layerColor;
+	this.obstacles = [];
 
 	}	
 	layers (){
 		fill(layerColor);
 		rect(0,y,width,grid_size);
-		this.obstacles = [];
+		
 		
 		for (var i = 0; i <this.numObstacles; i++) {
 			var x = i * this.space + this.xObstacle;
@@ -33,7 +34,7 @@ class Layer {
 	}
 
 	update () {
-		for(var i = 0: i < this.obstacles.length; i++) {
+		for(var i = 0; i < this.obstacles.length; i++) {
 			this.obstacles[i].update();
 		}
 	}
