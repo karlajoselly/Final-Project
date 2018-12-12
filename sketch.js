@@ -85,7 +85,7 @@ function draw() {
   barrelMain.display();
 
 
-
+  drawSprites();
 }
 
 
