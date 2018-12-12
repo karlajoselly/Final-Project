@@ -3987,15 +3987,15 @@ function construct(constructor, args) {
 function Quadtree( bounds, max_objects, max_levels, level ) {
 
   this.active = true;
-  this.max_objects	= max_objects || 10;
-  this.max_levels		= max_levels || 4;
+  this.max_objects  = max_objects || 10;
+  this.max_levels   = max_levels || 4;
 
-  this.level 			= level || 0;
-  this.bounds 		= bounds;
+  this.level      = level || 0;
+  this.bounds     = bounds;
 
-  this.objects 		= [];
-  this.object_refs	= [];
-  this.nodes 			= [];
+  this.objects    = [];
+  this.object_refs  = [];
+  this.nodes      = [];
 }
 
 Quadtree.prototype.updateBounds = function() {
@@ -4030,61 +4030,61 @@ Quadtree.prototype.updateBounds = function() {
 };
 
 /*
-	 * Split the node into 4 subnodes
-	 */
+   * Split the node into 4 subnodes
+   */
 Quadtree.prototype.split = function() {
 
-  var nextLevel	= this.level + 1,
-      subWidth	= Math.round( this.bounds.width / 2 ),
-      subHeight 	= Math.round( this.bounds.height / 2 ),
-      x 			= Math.round( this.bounds.x ),
-      y 			= Math.round( this.bounds.y );
+  var nextLevel = this.level + 1,
+      subWidth  = Math.round( this.bounds.width / 2 ),
+      subHeight   = Math.round( this.bounds.height / 2 ),
+      x       = Math.round( this.bounds.x ),
+      y       = Math.round( this.bounds.y );
 
   //top right node
   this.nodes[0] = new Quadtree({
-    x	: x + subWidth,
-    y	: y,
-    width	: subWidth,
-    height	: subHeight
+    x : x + subWidth,
+    y : y,
+    width : subWidth,
+    height  : subHeight
   }, this.max_objects, this.max_levels, nextLevel);
 
   //top left node
   this.nodes[1] = new Quadtree({
-    x	: x,
-    y	: y,
-    width	: subWidth,
-    height	: subHeight
+    x : x,
+    y : y,
+    width : subWidth,
+    height  : subHeight
   }, this.max_objects, this.max_levels, nextLevel);
 
   //bottom left node
   this.nodes[2] = new Quadtree({
-    x	: x,
-    y	: y + subHeight,
-    width	: subWidth,
-    height	: subHeight
+    x : x,
+    y : y + subHeight,
+    width : subWidth,
+    height  : subHeight
   }, this.max_objects, this.max_levels, nextLevel);
 
   //bottom right node
   this.nodes[3] = new Quadtree({
-    x	: x + subWidth,
-    y	: y + subHeight,
-    width	: subWidth,
-    height	: subHeight
+    x : x + subWidth,
+    y : y + subHeight,
+    width : subWidth,
+    height  : subHeight
   }, this.max_objects, this.max_levels, nextLevel);
 };
 
 
 /*
-	 * Determine the quadtrant for an area in this node
-	 */
+   * Determine the quadtrant for an area in this node
+   */
 Quadtree.prototype.getIndex = function( pRect ) {
   if(!pRect.collider)
     return -1;
   else
   {
-    var index 				= -1,
-        verticalMidpoint 	= this.bounds.x + (this.bounds.width / 2),
-        horizontalMidpoint 	= this.bounds.y + (this.bounds.height / 2),
+    var index         = -1,
+        verticalMidpoint  = this.bounds.x + (this.bounds.width / 2),
+        horizontalMidpoint  = this.bounds.y + (this.bounds.height / 2),
 
         //pRect can completely fit within the top quadrants
         topQuadrant = (pRect.collider.top() < horizontalMidpoint && pRect.collider.top() + pRect.collider.size().y < horizontalMidpoint),
@@ -4115,10 +4115,10 @@ Quadtree.prototype.getIndex = function( pRect ) {
 
 
 /*
-	 * Insert an object into the node. If the node
-	 * exceeds the capacity, it will split and add all
-	 * objects to their corresponding subnodes.
-	 */
+   * Insert an object into the node. If the node
+   * exceeds the capacity, it will split and add all
+   * objects to their corresponding subnodes.
+   */
 Quadtree.prototype.insert = function( obj ) {
   //avoid double insertion
   if(this.objects.indexOf(obj) === -1)
@@ -4163,8 +4163,8 @@ Quadtree.prototype.insert = function( obj ) {
 
 
 /*
-	 * Return all objects that could collide with a given area
-	 */
+   * Return all objects that could collide with a given area
+   */
 Quadtree.prototype.retrieve = function( pRect ) {
 
 
@@ -4202,8 +4202,8 @@ Quadtree.prototype.retrieveFromGroup = function( pRect, group ) {
 };
 
 /*
-	 * Get all objects stored in the quadtree
-	 */
+   * Get all objects stored in the quadtree
+   */
 Quadtree.prototype.getAll = function() {
 
   var objects = this.objects;
@@ -4217,8 +4217,8 @@ Quadtree.prototype.getAll = function() {
 
 
 /*
-	 * Get the node in which a certain object is stored
-	 */
+   * Get the node in which a certain object is stored
+   */
 Quadtree.prototype.getObjectNode = function( obj ) {
 
   var index;
@@ -4249,9 +4249,9 @@ Quadtree.prototype.getObjectNode = function( obj ) {
 
 
 /*
-	 * Removes a specific object from the quadtree
-	 * Does not delete empty subnodes. See cleanup-function
-	 */
+   * Removes a specific object from the quadtree
+   * Does not delete empty subnodes. See cleanup-function
+   */
 Quadtree.prototype.removeObject = function( obj ) {
 
   var node = this.getObjectNode( obj ),
@@ -4264,8 +4264,8 @@ Quadtree.prototype.removeObject = function( obj ) {
 
 
 /*
-	 * Clear the quadtree and delete all objects
-	 */
+   * Clear the quadtree and delete all objects
+   */
 Quadtree.prototype.clear = function() {
 
   this.objects = [];
@@ -4282,9 +4282,9 @@ Quadtree.prototype.clear = function() {
 
 
 /*
-	 * Clean up the quadtree
-	 * Like clear, but objects won't be deleted but re-inserted
-	 */
+   * Clean up the quadtree
+   * Like clear, but objects won't be deleted but re-inserted
+   */
 Quadtree.prototype.cleanup = function() {
 
   var objects = this.getAll();

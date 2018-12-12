@@ -27,6 +27,12 @@ function preload() {
 	coin = loadAnimation(coinSprite);
 	coin.looping=false;
 
+	ice = loadImage('assets/ice.png');
+
+	mountain = loadImage('assets/mountain.png');
+	tree = loadImage('assets/tree.png');
+	
+
 
 }
 
@@ -44,20 +50,23 @@ function setup() {
 // constructor(rowY, numObstacles, tempSpeed, obstacleWidth, 
 // 		tempSpacing, xObstacle,layerColor,barrelDeath)
   layers = [ 
-  	new Layer(            0, 1,    0, 150,   0,   0, color(244,244,245),false),
-    new Layer(    grid_size, 1,    0, 150,   0,   0, color(244,244,245),false),
-    new Layer(2 * grid_size, 2,  0.5, 150, 400,  10, color(96,202,228),true),
-    new Layer(3 * grid_size, 3, -1.3, 70, 200,  30, color(244,244,245),false),
-    new Layer(4 * grid_size, 2,  2.3, 70, 250,  25, color(244,244,245),false),
-    new Layer(5 * grid_size, 1,    0, 150,   0,   0,color(96,202,228), true),
-    new Layer(6 * grid_size, 3,  1.2, 70, 150, 100, color(244,244,245),false),
-    new Layer(7 * grid_size, 2, -3.5, 70, 200, 150, color(96,202,228), true),
-    new Layer(8 * grid_size, 2,    2, 70, 300,   0, color(244,244,245),false),
-    new Layer(9 * grid_size, 2,    0, 150,   0,   0, color(244,244,245),false),
+  	new Layer(            0, 1,    0, 150,   0,   0, color(244,244,245),false,ice),
+    new Layer(    grid_size, 1,    0, 150,   0,   0, color(244,244,245),false,ice),
+    new Layer(2 * grid_size, 2,  0.5, 150, 400,  10, color(96,202,228),true,mountain),
+    new Layer(3 * grid_size, 3, -1.3, 70, 200,  30, color(244,244,245),false,ice),
+    new Layer(4 * grid_size, 2,  2.3, 70, 250,  25, color(244,244,245),false,ice),
+    new Layer(5 * grid_size, 1,    0, 150,   0,   0,color(96,202,228), true,mountain),
+    new Layer(6 * grid_size, 3,  1.2, 70, 150, 100, color(244,244,245),false,ice),
+    new Layer(7 * grid_size, 2, -3.5, 70, 200, 150, color(96,202,228), true,mountain),
+    new Layer(8 * grid_size, 2,    2, 70, 300,   0, color(244,244,245),false,ice),
+    new Layer(9 * grid_size, 2,    0, 150,   0,   0, color(244,244,245),false,ice),
   ];
 
   createCanvas(width, layers.length * grid_size);
   resetGame();	
+  for (var i = 0; i < layers.length; i++) {
+	layers[i].layers();
+}
 
 }
 function draw() {
@@ -72,14 +81,14 @@ function draw() {
 	    layers[i].update();
 	    if(barrelMain.intersects(layers[i])) {
 	      intersects = layers[i].hits(barrelMain);
-	      if((intersects !== null) ^ layers[i].barrelDeath) {
+	      if((intersects !== null) && layers[i].barrelDeath) {
 	        resetGame();
 	      }
 	    }
 
 
     }
-  
+  // console.log(intersects)
   barrelMain.attach(intersects);
   barrelMain.update();
   barrelMain.display();
@@ -92,13 +101,13 @@ function draw() {
 
 function keyPressed() {
   if(keyCode === UP_ARROW) {
-    barrel.move(0, -grid_size);
+    barrelMain.move(0, -grid_size);
   } else if(keyCode === DOWN_ARROW) {
-    barrel.move(0, grid_size);
+    barrelMain.move(0, grid_size);
   } else if(keyCode === LEFT_ARROW) {
-    barrel.move(-grid_size, 0);
+    barrelMain.move(-grid_size, 0);
   } else if(keyCode === RIGHT_ARROW) {
-    barrel.move(grid_size, 0);
+    barrelMain.move(grid_size, 0);
   }
 }
 

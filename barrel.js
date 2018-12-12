@@ -1,17 +1,20 @@
 class Barrel {
 
 	constructor(x,y,barrelGraphic) {
-	this.x;
-	this.y;
-	this.barrelGraphic;
-	this.sitting_on = null;
+		this.x = x;
+		this.y = y;
+		this.w = grid_size;
+		this.speed = 0;
+		this.barrelGraphic=barrelGraphic;
+		this.sitting_on = null;
+		console.log("new object!",x,y,barrelGraphic)
 	// this.w = 150;
 	// this.h = 150;
 	
 
 	}
 	intersects (other) {
-		return! (
+		return !(
 			 this.x + this.w  <= other.x            ||
     		 this.x           >= other.x + other.w  ||
     		 this.y + this.h  <= other.y            ||
@@ -32,12 +35,12 @@ class Barrel {
 			this.x += this.sitting_on.speed;
 		}
 
-		this.x += constrain(this.x, 0 , width -this.w)
+		// this.x += constrain(this.x, 0 , width -this.w)
 	}
 
 	display () {
-
-		scale(0.5);
+		// console.log(this.x,this.y)
+		// scale(0.5);
 		animation(barrel, this.x, this.y);
 		// animation(obstacleGraphic,this.x,this.y);
 

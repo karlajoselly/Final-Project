@@ -1,12 +1,13 @@
 class Obstacle {
 
-	constructor(x,y,obstacleGraphic,s,w,h,imageSize) {
-	this.x;
-	this.y;
-	this.w;	
-	this.h;
-	this.imageSize;
-	this.speed = s;
+	constructor(x,y,w,h,s,obstacleGraphic) {
+		this.x=x;
+		this.y=y;
+		this.w=w;	
+		this.h=h;
+		// this.imageSize=imageSize;
+		this.speed = s;
+		this.obstacleGraphic=obstacleGraphic
 	
 
 	}
@@ -37,10 +38,16 @@ class Obstacle {
 	}
 
 	display () {
-		scale(this.imageSize);
-		image(this.obstacleGraphic,this.w,this.h,this.x,this.y);
-		// animation(obstacleGraphic,this.x,this.y);
-
+		push()
+			let scaleFactor = grid_size / this.obstacleGraphic.height
+			// console.log(this.x,this.y)
+			translate(this.x,this.y)
+			scale(scaleFactor);
+			// console.log(this.obstacleGraphic)
+			// console.log(this.y)
+			image(this.obstacleGraphic,0,0);
+			// animation(obstacleGraphic,this.x,this.y);
+		pop()
 	}
 
 }	
